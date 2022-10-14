@@ -1,0 +1,41 @@
+#!/bin/bash
+source /etc/cbbc/config
+
+COMPLETE_API_URL="$API_URL/validator/$SIGNER_KEY/blocks/bor"
+if [ -z $API_URL ] || [ -z $FILE_PATH ] ||  [ -z $SIGNER_KEY ]
+then
+   echo "Set yours variables in /etc/cbbc/config file!"
+
+   if [ -z $API_URL ]
+   then
+       echo -e "Variable API_URL is empty!"
+   fi
+   if [ -z $FILE_PATH ]
+   then  
+       echo -e "Variable FILE_PATH is empty!"
+   fi 
+   if [ -z $SIGNER_KEY ] 
+   then  
+       echo -e "Variable SIGNER_KEY is empty!"
+   fi 
+
+else
+
+while true; do
+  BLOCK=$(tail -n 1000 $FILE_PATH | grep "Imported new chain segment" | tail -1 | awk -F'number=' '{ print $2 }' | sed -e 's/,//g')
+  TIMESTAMP=$(date +'%Y-%m-%dT%H:%M:%S.%N')
+  JSON='{ "block": '$BLOCK' ,"timestamp":"'$TIMESTAMP'" }'
+  if [ -z $BLOCK ]
+    then
+        echo -e "Not found block in log file: $FILE_PATH \n"
+    else
+        echo -e "Block collected $BLOCK from file $FILE_PATH\n"
+        echo -e "Request: Send JSON to API $COMPLETE_API_URL\n$JSON\n" 
+        echo "Response: "
+        curl -X POST "$COMPLETE_API_URL" -d "{ \"block\" : "$BLOCK" , \"timestamp\" : \""$TIMESTAMP"\" }" -H 'Content-Type: application/json'
+        echo -e "\n"
+  fi
+  sleep 2;
+done
+
+fi

@@ -1,0 +1,10 @@
+[Unit]
+Description=CBB Client Service
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/cbbc
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

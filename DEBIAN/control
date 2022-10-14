@@ -1,0 +1,6 @@
+Package: cbbc
+Version: 1.0.0
+Architecture: amd64
+Maintainer: Internal Pointers <support@stakepool.dev.br>
+Description: Tool for collect polygon bor blocks in log file
+Depends: awk | curl | sed
