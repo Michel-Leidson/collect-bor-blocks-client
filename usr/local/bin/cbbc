@@ -1,7 +1,8 @@
 #!/bin/bash
 source /etc/cbbc/config
 
-COMPLETE_API_URL="$API_URL/validator/$SIGNER_KEY/blocks/bor"
+VAR=$(echo $SIGNER_KEY | awk '{ print tolower($SIGNER_KEY) }')
+COMPLETE_API_URL="$API_URL/validator/$VAR/blocks/bor"
 if [ -z $API_URL ] || [ -z $FILE_PATH ] ||  [ -z $SIGNER_KEY ]
 then
    echo "Set yours variables in /etc/cbbc/config file!"
