@@ -1,4 +1,4 @@
-# collect-bor-blocks-client
+# Blocks Monitoring
  
 -------
 1 - Download .deb file
