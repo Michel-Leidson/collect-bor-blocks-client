@@ -4,7 +4,7 @@
 1 - Download .deb file
 ###
 ```
-wget https://github.com/Michel-Leidson/collect-bor-blocks-client.git/releases/download/1.0.2/sp-tools-cbbc_1.0.2_amd64.deb
+wget https://github.com/Michel-Leidson/collect-bor-blocks-client/releases/download/1.0.2/sp-tools-cbbc_1.0.2_amd64.deb
 ```
 Install
 --------
